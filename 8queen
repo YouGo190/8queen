@@ -1,0 +1,31 @@
+N=8 #列数
+q=[0]*N #列のタプル作成
+count_all=0 #総組み合わせ数カウンター
+count_fs=0 #成功パターン数カウンター
+#列ごとの繰り返し処理
+for q[0]in (range(0,N,1)):
+  for q[1]in (range(0,N,1)):
+    for q[2]in (range(0,N,1)):
+      for q[3]in (range(0,N,1)):
+        for q[4]in (range(0,N,1)):
+          for q[5]in (range(0,N,1)):
+            for q[6]in (range(0,N,1)):
+              for q[7]in (range(0,N,1)):
+                 count_all+=1 #総組み合わせ数カウント+1
+                 fy=[1]*N #列(q)の数に対応した行の数のタプル作成、1=フラグ立て
+                 fl=[1]*(2*N-1) #左斜めラインのタプル作成
+                 fr=[1]*(2*N-1) #右斜めラインのタプル作成
+                 fs=True #フラグの条件付け
+
+                 for i in range(0,N,1): #qの数繰り返し処理
+                   if(fy[q[i]]==1&fl[q[i]+i]==1&fr[(N-1)-i+q[i]]==1): #列、左斜め、右斜めすべてフラグが立っている場合
+                     fy[q[i]]=0 #フラグを折る*3
+                     fl[q[i]+i]=0
+                     fr[(N-1)-i+q[i]]=0
+                   else: #1つでもフラグが折れている場合
+                     fs=False #失敗
+
+                 if(fs==True): #成功の場合
+                    count_fs+=1 #成功パターン数+1
+                    print(q) #パターン出力
+print("総組み合わせ数:",count_all,"成功パターン数:",count_fs)
